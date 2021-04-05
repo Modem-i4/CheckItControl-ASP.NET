@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Teacher Page";
+}
+
+<div id="app">
+    <teacher-component
+                       :teachers="@Model"></teacher-component>
+</div>
+
+@section scripts {
+    <script src="@Url.Content("~/bundle/teacher.js")"></script>
+}
