@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scripts\Home\" />
+    <Folder Include="Scripts\Pages\Home\" />
   </ItemGroup>
 
 </Project>

@@ -2,8 +2,8 @@ var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 
-var appBasePath = './Scripts/'; // where the source files located
-var publicPath = '../bundle/'; // public path to modify asset urls. eg: '../bundle' => 'www.example.com/bundle/main.js'
+var appBasePath = './Scripts/Pages/'; // where the source files located
+var publicPath = '../../bundle/'; // public path to modify asset urls. eg: '../bundle' => 'www.example.com/bundle/main.js'
 var bundleExportPath = './wwwroot/bundle/'; // directory to export build files
 
 var jsEntries = {}; // listing to compile

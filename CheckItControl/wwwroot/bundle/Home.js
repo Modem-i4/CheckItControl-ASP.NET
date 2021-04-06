@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "../bundle/";
+/******/ 	__webpack_require__.p = "../../bundle/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 5);
@@ -95,6 +95,7 @@ module.exports = g;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
  * Vue.js v2.6.12
  * (c) 2014-2020 Evan You
@@ -12084,7 +12085,7 @@ function getOuterHTML (el) {
 
 Vue.compile = compileToFunctions;
 
-/* harmony default export */ __webpack_exports__["a"] = (Vue);
+/* harmony default export */ __webpack_exports__["default"] = (Vue);
 
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(0), __webpack_require__(2).setImmediate))
 
@@ -12553,7 +12554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-new __WEBPACK_IMPORTED_MODULE_0_vue__["a" /* default */]({
+new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
     el: "#app",
     components: {
         HomeComponent: __WEBPACK_IMPORTED_MODULE_1__home_vue___default.a
@@ -12583,7 +12584,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\Home\\home.vue"
+__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\Pages\\Home\\home.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -12594,9 +12595,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-0f611f1f", __vue_options__)
+    hotAPI.createRecord("data-v-28f9c8a7", __vue_options__)
   } else {
-    hotAPI.reload("data-v-0f611f1f", __vue_options__)
+    hotAPI.reload("data-v-28f9c8a7", __vue_options__)
   }
 })()}
 if (__vue_options__.functional) {console.error("[vue-loader] home.vue: functional components are not supported and should be defined in plain js files using render functions.")}
@@ -12647,7 +12648,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-0f611f1f", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-28f9c8a7", module.exports)
   }
 }
 
