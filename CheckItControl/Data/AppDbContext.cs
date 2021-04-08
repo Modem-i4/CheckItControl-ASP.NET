@@ -15,5 +15,6 @@ namespace CheckItControl.Data
         }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Quiz> Quizzes { get; set; }
+        public DbSet<Discipline> Disciplines { get; set; }
     }
 }
