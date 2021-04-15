@@ -11,7 +11,8 @@ export default {
             loading: true,
             options: {
                 itemsPerPage: 10,
-                sortDesc : 'desc',
+                sortDesc: 'desc',
+                sortBy: '',
             },
             footerOptions: {
                 itemsPerPageOptions: [10, 25, 50, 100],
@@ -19,8 +20,8 @@ export default {
 
             CRUD: '',
             headers: [],
-            defaultSortByField: 'id',
-            defaultSortDirection: 'desc',
+            defaultSortByField: 'Id',
+            defaultSortDirection: 'DESC',
         }
     },
     computed: {
@@ -48,12 +49,6 @@ export default {
             this.applySearch()
 
         }, 400),*/
-        searches: {
-            handler() {
-                this.applySearch()
-            },
-            deep: true,
-        }
     },
     created() {
         this.fetch();
@@ -65,27 +60,14 @@ export default {
         },
         fetch() {
             this.loading = true;
-            $.get(this.CRUD)
-                .then(response => {
-                    console.log(this.items);
-                    this.items = response;
-                    this.loading = false;
-                });
-        },
-        /*
-        fetch() {
-            this.loading = true;
-            axios.get(this.crudApiEndpoint, {
-                params: {
-                    search: (this.search === '' ? null : this.search),
-                    searches: this.searches,
+            $.get(this.CRUD, {
+                    search: this.search,
 
                     page: this.options.page,
                     perPage: this.options.itemsPerPage,
 
                     sortBy: this.sortBy,
                     sortDirection: this.sortDirection,
-                }
             }).then(response => {
                 this.items = response.data.data;
                 this.pagination.total = response.data.total;
@@ -93,6 +75,5 @@ export default {
                 this.loading = false;
             })
         },
-        */
     }
 }
