@@ -10,13 +10,14 @@ using System.Threading.Tasks;
 
 namespace CheckItControl.Controllers
 {
-    public class DisciplineController : BaseController<Quiz>
+    public class DisciplineController : BaseController<Discipline>
     {
-        private static string[] searchable = new string[] { "Title" };
+        private static string[] searchable = new string[] { "Title", "Description" };
 
         public DisciplineController(AppDbContext ctx) : base(searchable)
         {
             base.ctx = ctx;
+            items = ctx.Disciplines;
         }
     }
 }

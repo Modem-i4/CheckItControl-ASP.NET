@@ -45,6 +45,11 @@ export default {
             },
             deep: true,
         },
+        items: {
+            handler() {
+                console.log(this.items)
+            }
+        }
         /*search: _.debounce(function () {
             this.applySearch()
 
@@ -68,12 +73,10 @@ export default {
 
                     sortBy: this.sortBy,
                     sortDirection: this.sortDirection,
-            }).then(response => {
-                this.items = response.data.data;
-                this.pagination.total = response.data.total;
-
-                this.loading = false;
-            })
-        },
+            }, (response) => {
+                    this.items = response;
+                    this.loading = false;
+            });
+        }
     }
 }

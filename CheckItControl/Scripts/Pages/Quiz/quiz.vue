@@ -11,7 +11,7 @@
                           hide-details
                           clearable
                           autocomplete="nope"
-                          @input="applySearch()"/>
+                          @input="applySearch()" />
         </v-card-title>
         <v-data-table :headers="headers"
                       :items="items"
@@ -29,9 +29,9 @@
             return {
                 CRUD: "/quiz/get",
                 headers: [
-                    { text: "id", value: 'Id' },
-                    { text: "title", value: 'Title' },
-                    { text: "description", value: 'Description' },
+                    { text: "id", value: 'id' },
+                    { text: "title", value: 'title' },
+                    { text: "description", value: 'description' },
                 ],
             }
         },
