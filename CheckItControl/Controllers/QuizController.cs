@@ -19,6 +19,7 @@ namespace CheckItControl.Controllers
         public QuizController(AppDbContext ctx) : base(searchable)
         {
             base.ctx = ctx;
+            items = ctx.Quizzes;
         }
     }
 }

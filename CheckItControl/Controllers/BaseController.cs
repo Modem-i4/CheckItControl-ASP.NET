@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace CheckItControl.Controllers
 {
-    public class BaseController<T> : Controller
+    public class BaseController<T> : Controller where T : class
     {
         protected AppDbContext ctx;
+        protected DbSet<T> items;
         private List<PropertyInfo> searchable;
         public BaseController(string[] searchableStrings)
         {
@@ -37,7 +38,7 @@ namespace CheckItControl.Controllers
 
             object order(object item) => sortField.GetValue(item);
 
-            var model = ctx.Quizzes.Where(check); // Refactor !!
+            var model = items.Where(check);
 
             if (sortDirection == "DESC")
                 model = model.OrderByDescending(order);
