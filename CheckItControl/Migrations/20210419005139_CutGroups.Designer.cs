@@ -4,14 +4,16 @@ using CheckItControl.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckItControl.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210419005139_CutGroups")]
+    partial class CutGroups
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,7 +28,7 @@ namespace CheckItControl.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<int>("SubjectId")
@@ -416,11 +418,9 @@ namespace CheckItControl.Data.Migrations
 
             modelBuilder.Entity("CheckItControl.Models.Discipline", b =>
                 {
-                    b.HasOne("CheckItControl.Models.Group", "Group")
+                    b.HasOne("CheckItControl.Models.Group", null)
                         .WithMany("Disciplines")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("GroupId");
 
                     b.HasOne("CheckItControl.Models.Subject", "Subject")
                         .WithMany("Disciplines")
@@ -431,8 +431,6 @@ namespace CheckItControl.Data.Migrations
                     b.HasOne("CheckItControl.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
-
-                    b.Navigation("Group");
 
                     b.Navigation("Subject");
 

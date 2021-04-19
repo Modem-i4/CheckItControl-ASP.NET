@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "../../bundle/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -58007,22 +58007,7 @@ if (false) {
 }
 
 /***/ }),
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */,
-/* 26 */,
-/* 27 */,
-/* 28 */,
-/* 29 */,
-/* 30 */,
-/* 31 */,
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58032,10 +58017,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuetify___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuetify__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vuetify_dist_vuetify_min_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__quiz_vue__ = __webpack_require__(37);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__quiz_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__quiz_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mdi_font_css_materialdesignicons_css__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__mdi_font_css_materialdesignicons_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__mdi_font_css_materialdesignicons_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__discipline_vue__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__discipline_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__discipline_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__group_vue__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__group_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__group_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mdi_font_css_materialdesignicons_css__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mdi_font_css_materialdesignicons_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__mdi_font_css_materialdesignicons_css__);
 
 
 
@@ -58044,20 +58031,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __WEBPACK_IMPORTED_MODULE_0_vue__["default"].use(__WEBPACK_IMPORTED_MODULE_1_vuetify___default.a);
 
-__WEBPACK_IMPORTED_MODULE_0_vue__["default"].component('subject', {
-    template: '#subject-selector',
-    methods: {
-        someMethod() {
-            this.$Batya.someMethod();
-        }
-    }
-});
-
 new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
     el: "#app",
     vuetify: new __WEBPACK_IMPORTED_MODULE_1_vuetify___default.a(),
     components: {
-        QuizComponent: __WEBPACK_IMPORTED_MODULE_3__quiz_vue___default.a
+        DisciplineComponent: __WEBPACK_IMPORTED_MODULE_3__discipline_vue___default.a,
+        GroupComponent: __WEBPACK_IMPORTED_MODULE_4__group_vue___default.a
     },
     icons: {
         iconfont: 'mdi',
@@ -58065,17 +58044,17 @@ new __WEBPACK_IMPORTED_MODULE_0_vue__["default"]({
 });
 
 /***/ }),
-/* 37 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __vue_exports__, __vue_options__
 var __vue_styles__ = {}
 
 /* script */
-__vue_exports__ = __webpack_require__(38)
+__vue_exports__ = __webpack_require__(23)
 
 /* template */
-var __vue_template__ = __webpack_require__(39)
+var __vue_template__ = __webpack_require__(24)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -58087,7 +58066,7 @@ __vue_options__ = __vue_exports__ = __vue_exports__.default
 if (typeof __vue_options__ === "function") {
   __vue_options__ = __vue_options__.options
 }
-__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\Pages\\Quiz\\quiz.vue"
+__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\Pages\\Discipline\\discipline.vue"
 __vue_options__.render = __vue_template__.render
 __vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
@@ -58098,18 +58077,18 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4ed6e267", __vue_options__)
+    hotAPI.createRecord("data-v-5953b472", __vue_options__)
   } else {
-    hotAPI.reload("data-v-4ed6e267", __vue_options__)
+    hotAPI.reload("data-v-5953b472", __vue_options__)
   }
 })()}
-if (__vue_options__.functional) {console.error("[vue-loader] quiz.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+if (__vue_options__.functional) {console.error("[vue-loader] discipline.vue: functional components are not supported and should be defined in plain js files using render functions.")}
 
 module.exports = __vue_exports__
 
 
 /***/ }),
-/* 38 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58150,19 +58129,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data() {
         return {
-            CRUD: "/quiz/",
+            CRUD: "/discipline/",
             headers: [
                 { text: "id", value: 'id' },
                 { text: "title", value: 'title' },
-                { text: "description", value: 'description' },
             ],
         }
-    }
+    },
 });
 
 
 /***/ }),
-/* 39 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -58171,10 +58149,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "setFilter": _vm.setFilter,
       "fetch": _vm.fetch
     }
-  }), _vm._v(" "), _c('v-card-title', [_c('h2', [_vm._v("Quizes")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-text-field', {
+  }), _vm._v(" "), _c('v-card-title', [_c('h2', [_vm._v("Disciplines")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-text-field', {
     attrs: {
       "append-icon": "mdi-magnify",
-      "label": "Search",
+      "label": 'Search',
       "single-line": "",
       "hide-details": "",
       "clearable": "",
@@ -58204,10 +58182,155 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-4ed6e267", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-5953b472", module.exports)
+  }
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(26)
+
+/* template */
+var __vue_template__ = __webpack_require__(27)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\Pages\\Discipline\\group.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-173bb310", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-173bb310", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] group.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_DataTableCore__ = __webpack_require__(7);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_DataTableCore__["a" /* default */]],
+    data() {
+        return {
+            CRUD: "/discipline/",
+            headers: [
+                { text: "id", value: 'id' },
+                { text: "title", value: 'title' },
+            ],
+            groupName: '',
+            groupId: 0
+        }
+    },
+    methods: {
+        getGroups() {
+            const url = window.location.href;
+            this.groupId = url.split("/").slice(-1)[0];
+            $.get("/group/getTitle/" + this.groupId,
+                (response) => { this.groupName = response })
+            this.setFilter('GroupId', this.groupId)
+        }
+    },
+    mounted() {
+        this.getGroups();
+    }
+});
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-app', [_c('v-card-title', [_c('h2', [_vm._v("Disciplimes of group " + _vm._s(this.groupName))]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-text-field', {
+    attrs: {
+      "append-icon": "mdi-magnify",
+      "label": 'Search',
+      "single-line": "",
+      "hide-details": "",
+      "clearable": "",
+      "autocomplete": "nope"
+    },
+    on: {
+      "input": function($event) {
+        return _vm.applySearch()
+      }
+    },
+    model: {
+      value: (_vm.search),
+      callback: function($$v) {
+        _vm.search = $$v
+      },
+      expression: "search"
+    }
+  })], 1), _vm._v(" "), _c('v-data-table', {
+    staticClass: "elevation-1",
+    attrs: {
+      "headers": _vm.headers,
+      "items": _vm.items,
+      "loading": _vm.loading
+    }
+  })], 1)
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-173bb310", module.exports)
   }
 }
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=Quiz.js.map
+//# sourceMappingURL=Discipline.js.map

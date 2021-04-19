@@ -6,6 +6,15 @@ import '@mdi/font/css/materialdesignicons.css'
 
 Vue.use(Vuetify);
 
+Vue.component('subject', {
+    template: '#subject-selector',
+    methods: {
+        someMethod() {
+            this.$Batya.someMethod();
+        }
+    }
+});
+
 new Vue({
     el: "#app",
     vuetify: new Vuetify(),

@@ -16,6 +16,7 @@ namespace CheckItControl.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public Teacher Author { get; set; }
+        public int SubjectId { get; set; }
         public Subject Subject { get; set; }
         public string QuestionsJSON { get; set; }
         public List<Lesson> Lessons { get; set; }

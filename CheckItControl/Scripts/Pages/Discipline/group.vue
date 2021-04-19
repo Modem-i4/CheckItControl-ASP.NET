@@ -1,8 +1,7 @@
 <template>
     <v-app>
-        <subject-selector @setFilter="setFilter" @fetch="fetch" />
         <v-card-title>
-            <h2>Disciplines</h2>
+            <h2>Disciplimes of group {{this.groupName}}</h2>
             <v-spacer></v-spacer>
             <v-text-field v-model="search"
                           append-icon="mdi-magnify"
@@ -23,12 +22,8 @@
 <script>
 
     import DataTableCore from "../../mixins/DataTableCore";
-    import SubjectSelector from "../../components/SubjectSelector";
     export default {
         mixins: [DataTableCore],
-        components: {
-            SubjectSelector
-        },
         data() {
             return {
                 CRUD: "/discipline/",
@@ -36,7 +31,21 @@
                     { text: "id", value: 'id' },
                     { text: "title", value: 'title' },
                 ],
+                groupName: '',
+                groupId: 0
             }
         },
+        methods: {
+            getGroups() {
+                const url = window.location.href;
+                this.groupId = url.split("/").slice(-1)[0];
+                $.get("/group/getTitle/" + this.groupId,
+                    (response) => { this.groupName = response })
+                this.setFilter('GroupId', this.groupId)
+            }
+        },
+        mounted() {
+            this.getGroups();
+        }
     };
 </script>

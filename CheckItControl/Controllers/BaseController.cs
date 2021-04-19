@@ -1,4 +1,6 @@
-﻿using CheckItControl.Data;
+﻿using CheckItControl.Classes;
+using CheckItControl.Data;
+using CheckItControl.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,6 +16,7 @@ namespace CheckItControl.Controllers
         protected AppDbContext ctx;
         protected DbSet<T> items;
         private List<PropertyInfo> searchable;
+        public BaseController() { }
         public BaseController(string[] searchableStrings)
         {
             searchable = searchableStrings.Select(o => typeof(T).GetProperty(o)).ToList();
@@ -22,7 +25,8 @@ namespace CheckItControl.Controllers
         {
             return View();
         }
-        public IActionResult Get(int page, int perPage, string sortBy, string sortDirection, string search)
+        [HttpPost]
+        public IActionResult Get(int page, int perPage, string sortBy, string sortDirection, string search, List<Filter> filters)
         {
             search ??= "";
             var sortField = typeof(T).GetProperty(sortBy);
@@ -38,14 +42,33 @@ namespace CheckItControl.Controllers
 
             object order(object item) => sortField.GetValue(item);
 
-            var model = items.Where(check);
+            var model = items.Where(check); 
+
+
+
+            
+            foreach (var filter in filters)
+            {
+                model = model.Where(o => Filter(o, filter));
+            }
 
             if (sortDirection == "DESC")
                 model = model.OrderByDescending(order);
             else
                 model = model.OrderBy(order);
-            model = model.Skip((page - 1) * perPage).Take(perPage).ToArray();
+            //model = model.Skip((page - 1) * perPage).Take(perPage).ToArray();
             return Ok(model);
+        }
+        public IActionResult GetAll()
+        {
+            var model = items.ToList();
+            return Ok(model);
+        }
+        public virtual bool Filter(T entity, Filter filter)
+        {
+            var filterProp = typeof(T).GetProperty(filter.Title);
+            string value = Convert.ToString(filterProp.GetValue(entity));
+            return value == filter.Value;
         }
     }
 }

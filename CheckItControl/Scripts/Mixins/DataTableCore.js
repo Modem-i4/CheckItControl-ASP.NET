@@ -4,7 +4,7 @@ export default {
         return {
             pagination: {},
             search: '',
-            searches:{},
+            filters: [],
             items: [],
             newItem: {},
 
@@ -55,28 +55,31 @@ export default {
 
         }, 400),*/
     },
-    created() {
-        this.fetch();
-    },
     methods: {
         applySearch() {
             this.options.page = 1;
             this.fetch()
         },
+        setFilter(title, value) {
+            let filter = [{ Title: title, Value: value }];
+            this.filters = filter;
+            this.applySearch();
+        },
         fetch() {
             this.loading = true;
-            $.get(this.CRUD, {
-                    search: this.search,
+            $.post(this.CRUD + "get", {
+                search: this.search,
+                filters: this.filters,
 
-                    page: this.options.page,
-                    perPage: this.options.itemsPerPage,
+                page: this.options.page,
+                perPage: this.options.itemsPerPage,
 
-                    sortBy: this.sortBy,
-                    sortDirection: this.sortDirection,
+                sortBy: this.sortBy,
+                sortDirection: this.sortDirection,
             }, (response) => {
-                    this.items = response;
-                    this.loading = false;
+                this.items = response;
+                this.loading = false;
             });
-        }
+        },
     }
 }

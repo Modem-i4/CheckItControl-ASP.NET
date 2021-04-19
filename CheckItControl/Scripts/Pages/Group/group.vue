@@ -2,11 +2,11 @@
     <v-app>
 
         <v-card-title>
-            <h2>Quizes</h2>
+            <h2>Groups</h2>
             <v-spacer></v-spacer>
             <v-text-field v-model="search"
                           append-icon="mdi-magnify"
-                          :label="'Search'"
+                          label="Search"
                           single-line
                           hide-details
                           clearable
@@ -17,6 +17,18 @@
                       :items="items"
                       :loading="loading"
                       class="elevation-1">
+            <template #item.controls="{ item }">
+
+                <v-btn-toggle shaped>
+                    <v-btn :href="`/student/group/` + item.id">
+                        Students
+                    </v-btn>
+
+                    <v-btn :href="`/discipline/group/` + item.id">
+                        Disciplines
+                    </v-btn>
+                </v-btn-toggle>
+            </template>
         </v-data-table>
     </v-app>
 </template>
@@ -27,12 +39,16 @@
         mixins: [DataTableCore],
         data() {
             return {
-                CRUD: "/subject/get",
+                CRUD: "/group/",
                 headers: [
-                    { text: "id", value: 'Id' },
-                    { text: "title", value: 'Title' },                    
+                    { text: "id", value: 'id' },
+                    { text: "title", value: 'title' },
+                    { value: 'controls', sortable: false, width: "1%" },                    
                 ],
             }
+        },
+        created() {
+            this.fetch();
         },
     };
 </script>

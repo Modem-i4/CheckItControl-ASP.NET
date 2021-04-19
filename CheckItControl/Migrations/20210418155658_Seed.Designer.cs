@@ -4,14 +4,16 @@ using CheckItControl.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CheckItControl.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210418155658_Seed")]
+    partial class Seed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,10 +28,7 @@ namespace CheckItControl.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GroupId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubjectId")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("TeacherId")
@@ -39,8 +38,6 @@ namespace CheckItControl.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("GroupId");
 
                     b.HasIndex("SubjectId");
 
@@ -86,7 +83,7 @@ namespace CheckItControl.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
+                    b.ToTable("Group");
                 });
 
             modelBuilder.Entity("CheckItControl.Models.Lesson", b =>
@@ -119,7 +116,7 @@ namespace CheckItControl.Data.Migrations
 
                     b.HasIndex("QuizId");
 
-                    b.ToTable("Lessons");
+                    b.ToTable("Lesson");
                 });
 
             modelBuilder.Entity("CheckItControl.Models.Quiz", b =>
@@ -138,7 +135,7 @@ namespace CheckItControl.Data.Migrations
                     b.Property<string>("QuestionsJSON")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubjectId")
+                    b.Property<int?>("SubjectId")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -160,7 +157,7 @@ namespace CheckItControl.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("GroupId")
+                    b.Property<int?>("GroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -170,7 +167,7 @@ namespace CheckItControl.Data.Migrations
 
                     b.HasIndex("GroupId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Student");
                 });
 
             modelBuilder.Entity("CheckItControl.Models.Subject", b =>
@@ -277,6 +274,21 @@ namespace CheckItControl.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("DisciplineGroup", b =>
+                {
+                    b.Property<int>("DisciplinesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("GroupsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DisciplinesId", "GroupsId");
+
+                    b.HasIndex("GroupsId");
+
+                    b.ToTable("DisciplineGroup");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -416,25 +428,13 @@ namespace CheckItControl.Data.Migrations
 
             modelBuilder.Entity("CheckItControl.Models.Discipline", b =>
                 {
-                    b.HasOne("CheckItControl.Models.Group", "Group")
+                    b.HasOne("CheckItControl.Models.Subject", null)
                         .WithMany("Disciplines")
-                        .HasForeignKey("GroupId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CheckItControl.Models.Subject", "Subject")
-                        .WithMany("Disciplines")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.HasOne("CheckItControl.Models.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
-
-                    b.Navigation("Group");
-
-                    b.Navigation("Subject");
 
                     b.Navigation("Teacher");
                 });
@@ -481,9 +481,7 @@ namespace CheckItControl.Data.Migrations
 
                     b.HasOne("CheckItControl.Models.Subject", "Subject")
                         .WithMany("Quizzes")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("SubjectId");
 
                     b.Navigation("Author");
 
@@ -494,11 +492,24 @@ namespace CheckItControl.Data.Migrations
                 {
                     b.HasOne("CheckItControl.Models.Group", "Group")
                         .WithMany("Students")
-                        .HasForeignKey("GroupId")
+                        .HasForeignKey("GroupId");
+
+                    b.Navigation("Group");
+                });
+
+            modelBuilder.Entity("DisciplineGroup", b =>
+                {
+                    b.HasOne("CheckItControl.Models.Discipline", null)
+                        .WithMany()
+                        .HasForeignKey("DisciplinesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Group");
+                    b.HasOne("CheckItControl.Models.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -559,8 +570,6 @@ namespace CheckItControl.Data.Migrations
 
             modelBuilder.Entity("CheckItControl.Models.Group", b =>
                 {
-                    b.Navigation("Disciplines");
-
                     b.Navigation("Students");
                 });
 
