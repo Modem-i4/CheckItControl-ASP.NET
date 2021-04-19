@@ -70,6 +70,34 @@ namespace CheckItControl.Controllers
             string value = Convert.ToString(filterProp.GetValue(entity));
             return value == filter.Value;
         }
+
+        public IActionResult Add(T model)
+        {
+            items.Add(model);
+            ctx.SaveChanges();
+            return Ok();
+        }
+
+        public IActionResult Edit(T model)
+        {
+            int? id = (int?)typeof(T).GetProperty("Id").GetValue(model);
+            var entity = items.Find(id);
+            var props = typeof(T).GetProperties();
+            foreach (var prop in props)
+            {
+                var value = prop.GetValue(model);
+                prop.SetValue(entity, value);
+            }
+            ctx.SaveChanges();
+            return Ok();
+        }
+        public IActionResult Delete(int id)
+        {
+            var entity = items.Find(id);
+            items.Remove(entity);
+            ctx.SaveChanges();
+            return Ok();
+        }
     }
 }
 

@@ -22,6 +22,8 @@ export default {
             headers: [],
             defaultSortByField: 'Id',
             defaultSortDirection: 'DESC',
+
+            editedItem: {}
         }
     },
     computed: {
@@ -81,5 +83,9 @@ export default {
                 this.loading = false;
             });
         },
+
+
+
+
     }
 }

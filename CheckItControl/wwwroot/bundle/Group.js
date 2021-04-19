@@ -12879,6 +12879,8 @@ process.umask = function() { return 0; };
             headers: [],
             defaultSortByField: 'Id',
             defaultSortDirection: 'DESC',
+
+            editedItem: {}
         }
     },
     computed: {
@@ -12938,6 +12940,9 @@ process.umask = function() { return 0; };
                 this.loading = false;
             });
         },
+
+
+
 
     }
 });

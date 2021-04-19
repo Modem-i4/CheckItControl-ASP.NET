@@ -12879,6 +12879,8 @@ process.umask = function() { return 0; };
             headers: [],
             defaultSortByField: 'Id',
             defaultSortDirection: 'DESC',
+
+            editedItem: {}
         }
     },
     computed: {
@@ -12938,6 +12940,9 @@ process.umask = function() { return 0; };
                 this.loading = false;
             });
         },
+
+
+
 
     }
 });
@@ -58075,7 +58080,7 @@ var __vue_styles__ = {}
 __vue_exports__ = __webpack_require__(38)
 
 /* template */
-var __vue_template__ = __webpack_require__(39)
+var __vue_template__ = __webpack_require__(42)
 __vue_options__ = __vue_exports__ = __vue_exports__ || {}
 if (
   typeof __vue_exports__.default === "object" ||
@@ -58117,6 +58122,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mixins_DataTableCore__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubjectSelector__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_SubjectSelector___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_SubjectSelector__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dialog__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Dialog___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Dialog__);
 //
 //
 //
@@ -58139,6 +58146,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -58146,7 +58169,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     mixins: [__WEBPACK_IMPORTED_MODULE_0__mixins_DataTableCore__["a" /* default */]],
     components: {
-        SubjectSelector: __WEBPACK_IMPORTED_MODULE_1__components_SubjectSelector___default.a
+        SubjectSelector: __WEBPACK_IMPORTED_MODULE_1__components_SubjectSelector___default.a,
+        Dialog: __WEBPACK_IMPORTED_MODULE_2__components_Dialog___default.a
     },
     data() {
         return {
@@ -58155,6 +58179,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 { text: "id", value: 'id' },
                 { text: "title", value: 'title' },
                 { text: "description", value: 'description' },
+                {value: "actions"}
             ],
         }
     }
@@ -58165,13 +58190,325 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var __vue_exports__, __vue_options__
+var __vue_styles__ = {}
+
+/* script */
+__vue_exports__ = __webpack_require__(40)
+
+/* template */
+var __vue_template__ = __webpack_require__(41)
+__vue_options__ = __vue_exports__ = __vue_exports__ || {}
+if (
+  typeof __vue_exports__.default === "object" ||
+  typeof __vue_exports__.default === "function"
+) {
+if (Object.keys(__vue_exports__).some(function (key) { return key !== "default" && key !== "__esModule" })) {console.error("named exports are not supported in *.vue files.")}
+__vue_options__ = __vue_exports__ = __vue_exports__.default
+}
+if (typeof __vue_options__ === "function") {
+  __vue_options__ = __vue_options__.options
+}
+__vue_options__.__file = "C:\\Users\\vasea\\source\\repos\\CheckItControl\\CheckItControl\\Scripts\\components\\Dialog.vue"
+__vue_options__.render = __vue_template__.render
+__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-96691b1e", __vue_options__)
+  } else {
+    hotAPI.reload("data-v-96691b1e", __vue_options__)
+  }
+})()}
+if (__vue_options__.functional) {console.error("[vue-loader] Dialog.vue: functional components are not supported and should be defined in plain js files using render functions.")}
+
+module.exports = __vue_exports__
+
+
+/***/ }),
+/* 40 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: () => ({
+        dialog: false,
+        dialogDelete: false,
+        editedIndex: -1,
+        defaultItem: {
+            name: '',
+            calories: 0,
+            fat: 0,
+            carbs: 0,
+            protein: 0,
+        },
+    }),
+
+    props: {
+        items: Array,
+        CRUD: "",
+        editedItem: {}
+    },
+
+    computed: {
+        formTitle() {
+            return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+        },
+    },
+
+    watch: {
+        dialog(val) {
+            val || this.close()
+        },
+        dialogDelete(val) {
+            val || this.closeDelete()
+        },
+    },
+
+
+    methods: {
+
+        editItem(item) {
+            console.log(item)
+            this.editedIndex = this.items.indexOf(item)
+            this.editedItem = Object.assign({}, item)
+            this.dialog = true
+        },
+
+        deleteItem(item) {
+            this.editedIndex = this.items.indexOf(item)
+            this.editedItem = Object.assign({}, item)
+            this.dialogDelete = true
+        },
+
+        deleteItemConfirm() {
+            $.post(this.CRUD + "delete/" + this.editedItem.id)
+            this.items.splice(this.editedIndex, 1)
+            this.closeDelete()
+        },
+
+        close() {
+            this.dialog = false
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            })
+        },
+
+        closeDelete() {
+            this.dialogDelete = false
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            })
+        },
+
+        save() {
+            console.log(this.editedItem.id)
+            if (this.editedIndex > -1) {
+                Object.assign(this.items[this.editedIndex], this.editedItem)
+                $.post(this.CRUD + "edit/", this.editedItem)
+            } else {
+                this.items.push(this.editedItem)
+                $.post(this.CRUD + "add/", this.editedItem)
+            }
+            this.close()
+        },
+    },
+});
+
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('v-toolbar', {
+    attrs: {
+      "flat": ""
+    }
+  }, [_c('v-dialog', {
+    attrs: {
+      "max-width": "500px"
+    },
+    scopedSlots: _vm._u([{
+      key: "activator",
+      fn: function(ref) {
+        var on = ref.on;
+        var attrs = ref.attrs;
+
+        return [_c('v-btn', _vm._g(_vm._b({
+          staticClass: "mb-2",
+          attrs: {
+            "color": "primary",
+            "dark": ""
+          }
+        }, 'v-btn', attrs, false), on), [_vm._v("\n                New Item\n            ")])]
+      }
+    }]),
+    model: {
+      value: (_vm.dialog),
+      callback: function($$v) {
+        _vm.dialog = $$v
+      },
+      expression: "dialog"
+    }
+  }, [_vm._v(" "), _c('v-card', [_c('v-card-title', [_c('span', {
+    staticClass: "headline"
+  }, [_vm._v(_vm._s(_vm.formTitle))])]), _vm._v(" "), _c('v-card-text', [_c('v-container', [_vm._t("default")], 2)], 1), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "color": "blue darken-1",
+      "text": ""
+    },
+    on: {
+      "click": _vm.close
+    }
+  }, [_vm._v("Cancel")]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "color": "blue darken-1",
+      "text": ""
+    },
+    on: {
+      "click": _vm.save
+    }
+  }, [_vm._v("Save")])], 1)], 1)], 1), _vm._v(" "), _c('v-dialog', {
+    attrs: {
+      "max-width": "500px"
+    },
+    model: {
+      value: (_vm.dialogDelete),
+      callback: function($$v) {
+        _vm.dialogDelete = $$v
+      },
+      expression: "dialogDelete"
+    }
+  }, [_c('v-card', [_c('v-card-title', {
+    staticClass: "headline"
+  }, [_vm._v("Are you sure you want to delete this item?")]), _vm._v(" "), _c('v-card-actions', [_c('v-spacer'), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "color": "blue darken-1",
+      "text": ""
+    },
+    on: {
+      "click": _vm.closeDelete
+    }
+  }, [_vm._v("Cancel")]), _vm._v(" "), _c('v-btn', {
+    attrs: {
+      "color": "blue darken-1",
+      "text": ""
+    },
+    on: {
+      "click": _vm.deleteItemConfirm
+    }
+  }, [_vm._v("OK")]), _vm._v(" "), _c('v-spacer')], 1)], 1)], 1)], 1)
+},staticRenderFns: []}
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-96691b1e", module.exports)
+  }
+}
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('v-app', [_c('subject-selector', {
     on: {
       "setFilter": _vm.setFilter,
       "fetch": _vm.fetch
     }
-  }), _vm._v(" "), _c('v-card-title', [_c('h2', [_vm._v("Quizes")]), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-text-field', {
+  }), _vm._v(" "), _c('v-card-title', [_c('h2', [_vm._v("Quizes")]), _vm._v(" "), _c('Dialog', {
+    ref: "dialog",
+    attrs: {
+      "items": _vm.items,
+      "CRUD": _vm.CRUD,
+      "editedItem": _vm.editedItem
+    }
+  }, [_c('v-row', [_c('v-col', {
+    attrs: {
+      "cols": "12",
+      "sm": "6",
+      "md": "4"
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Title"
+    },
+    model: {
+      value: (_vm.editedItem.title),
+      callback: function($$v) {
+        _vm.$set(_vm.editedItem, "title", $$v)
+      },
+      expression: "editedItem.title"
+    }
+  })], 1), _vm._v(" "), _c('v-col', {
+    attrs: {
+      "cols": "12",
+      "sm": "6",
+      "md": "4"
+    }
+  }, [_c('v-text-field', {
+    attrs: {
+      "label": "Description"
+    },
+    model: {
+      value: (_vm.editedItem.description),
+      callback: function($$v) {
+        _vm.$set(_vm.editedItem, "description", $$v)
+      },
+      expression: "editedItem.description"
+    }
+  })], 1)], 1)], 1), _vm._v(" "), _c('v-spacer'), _vm._v(" "), _c('v-text-field', {
     attrs: {
       "append-icon": "mdi-magnify",
       "label": "Search",
@@ -58198,7 +58535,34 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "headers": _vm.headers,
       "items": _vm.items,
       "loading": _vm.loading
-    }
+    },
+    scopedSlots: _vm._u([{
+      key: "item.actions",
+      fn: function(ref) {
+        var item = ref.item;
+
+        return [_c('v-icon', {
+          staticClass: "mr-2",
+          attrs: {
+            "small": ""
+          },
+          on: {
+            "click": function($event) {
+              return _vm.$refs.dialog.editItem(item)
+            }
+          }
+        }, [_vm._v("mdi-pencil")]), _vm._v(" "), _c('v-icon', {
+          attrs: {
+            "small": ""
+          },
+          on: {
+            "click": function($event) {
+              return _vm.$refs.dialog.deleteItem(item)
+            }
+          }
+        }, [_vm._v("mdi-delete")])]
+      }
+    }])
   })], 1)
 },staticRenderFns: []}
 if (false) {
